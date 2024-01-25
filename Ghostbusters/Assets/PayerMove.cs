@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PayerMove : MonoBehaviour
 {
+    private bool isFront = true;
     private Rigidbody2D rB;
     private BoxCollider2D call;
     private Animator an;
@@ -18,7 +19,6 @@ public class PayerMove : MonoBehaviour
         sp = GetComponent<SpriteRenderer>();
         rB = GetComponent<Rigidbody2D>();
         an = GetComponent<Animator>();
-        Debug.Log("Move start");
     }
 
     // Update is called once per frame
@@ -32,6 +32,7 @@ public class PayerMove : MonoBehaviour
         {
             rB.velocity = new Vector2(rB.velocity.x, 14f);
         }
+        
 
         UpdateAmination(dirX, isShooting);
     }
@@ -42,13 +43,19 @@ public class PayerMove : MonoBehaviour
         if (dirX > 0f)
         {
             state = MovementState.runing;
-            sp.flipX = false;
+            if(!isFront) 
+            {
+                Flip();
+            }
         }
         else if (dirX < 0f)
         {
             state = MovementState.runing;
-            sp.flipX = true;
-        }
+            if (isFront)
+            {
+                Flip();
+            }
+        }   
         else
         {
             state = MovementState.idle;
@@ -67,8 +74,14 @@ public class PayerMove : MonoBehaviour
         an.SetBool("IsShooting", isShooting);
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.BoxCast(call.bounds.center, call.bounds.size, 0f, Vector2.down, 1f, jumpableGround);
+    }
+
+    void Flip()
+    {
+        isFront = !isFront;
+        transform.Rotate(0f, 180f, 0f);
     }
 }
