@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public ShootButton shootButton;
     public Transform firePoint;
     public GameObject bullet;
-    public GameObject player;
     public PayerMove playerMove;
     private float timer = 0.0f;
     private float waitTime = 0.5f;
@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetKey(KeyCode.LeftControl) && timer > waitTime && playerMove.IsGrounded())
+        if (shootButton.isShooting && timer > waitTime && playerMove.IsGrounded())
         {
             Shoot();
             timer = 0.0f;

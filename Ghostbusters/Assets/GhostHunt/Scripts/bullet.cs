@@ -8,6 +8,7 @@ public class bullet : MonoBehaviour
     public int DMG = 20;
     public float speed = 19.0f;
     public Rigidbody2D rb;
+    public GameObject impackEfect;
     // Update is called once per frame
     void Start()
     {
@@ -22,6 +23,7 @@ public class bullet : MonoBehaviour
         {
             enamy.TakeDamage(DMG);
         }
+        Instantiate(impackEfect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PayerMove : MonoBehaviour
 {
+    public JumpButton jumpButton;
+    public ShootButton shootButton;
+    public Joystick joystick;
     private bool isFront = true;
     private Rigidbody2D rB;
     private BoxCollider2D call;
@@ -24,11 +27,11 @@ public class PayerMove : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        float dirX = Input.GetAxisRaw("Horizontal");
-        bool isShooting = Input.GetKey(KeyCode.LeftControl);
+        float dirX = joystick.Direction.x;
+        bool isShooting = shootButton.isShooting;
         rB.velocity = new Vector2(dirX * 7f, rB.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (jumpButton.isJumping && IsGrounded())
         {
             rB.velocity = new Vector2(rB.velocity.x, 14f);
         }
