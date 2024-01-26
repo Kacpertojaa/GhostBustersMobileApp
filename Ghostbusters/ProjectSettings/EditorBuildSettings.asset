@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/test.unity
     guid: ad98827853780d047972e26e0b291795
+  - enabled: 1
+    path: Assets/Scenes/GhostHunt1.unity
+    guid: 2b0dacddd2d31bb4b86ee2c59fac17ff
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 935ac797f83acd14b95e478f7bb90906, type: 2}
   m_UseUCBPForAssetBundles: 0
