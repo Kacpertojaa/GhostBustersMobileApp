@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ObjectChange : MonoBehaviour
 {
+    public GameObject exit;
     public GameObject[] domki;
     public bool allowsSceneTransition = false;
 
@@ -21,17 +22,7 @@ public class ObjectChange : MonoBehaviour
 
         int randomDomIndex = Random.Range(0, domki.Length);
         GameObject randomDom = domki[randomDomIndex];
-
-        Renderer renderer = randomDom.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            // Zmiana koloru na czarny
-            renderer.material.color = Color.black;
-
-            // Dodanie interakcji 
-            randomDom.AddComponent<BoxCollider>(); // Dodanie collidera, aby obiekt by³ klikalny
-            randomDom.AddComponent<ObjectClickHandler>(); // Dodanie skryptu obs³uguj¹cego klikniêcie
-        }
+        Instantiate(exit, randomDom.transform.position, Quaternion.identity);
     }
 }
 
