@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectChange : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class ObjectChange : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("ObjectChangeColor", 0f, 10f);
+        Invoke("ObjectChangeColor", 5f);
     }
 
     void ObjectChangeColor()
@@ -24,8 +25,21 @@ public class ObjectChange : MonoBehaviour
         Renderer renderer = randomDom.GetComponent<Renderer>();
         if (renderer != null)
         {
+            // Zmiana koloru na czarny
             renderer.material.color = Color.black;
-            allowsSceneTransition = true;
+
+            // Dodanie interakcji 
+            randomDom.AddComponent<BoxCollider>(); // Dodanie collidera, aby obiekt by³ klikalny
+            randomDom.AddComponent<ObjectClickHandler>(); // Dodanie skryptu obs³uguj¹cego klikniêcie
         }
+    }
+}
+
+public class ObjectClickHandler : MonoBehaviour
+{
+    void OnMouseDown()
+    {
+        // Po klikniêciu, przejœcie do innej sceny
+        SceneManager.LoadScene(SceneData.MenuView);
     }
 }
